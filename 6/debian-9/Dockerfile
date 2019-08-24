@@ -31,10 +31,13 @@ ENV BITNAMI_APP_NAME="elasticsearch" \
     ELASTICSEARCH_PORT_NUMBER="9200" \
     LD_LIBRARY_PATH="/opt/bitnami/elasticsearch/jdk/lib:/opt/bitnami/elasticsearch/jdk/lib/server:$LD_LIBRARY_PATH" \
     NAMI_PREFIX="/.nami" \
+    ELASTICSEARCH_DAEMON_USER="1001" \
+    ELASTICSEARCH_DAEMON_GROUP="root" \
+    BITNAMI_DEBUG="false" \
     PATH="/opt/bitnami/java/bin:/opt/bitnami/elasticsearch/bin:$PATH"
 
 EXPOSE 9200 9300
 
-USER 1001
+#USER 1001
 ENTRYPOINT [ "/entrypoint.sh" ]
 CMD [ "/run.sh" ]

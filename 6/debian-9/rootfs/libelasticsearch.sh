@@ -391,6 +391,7 @@ elasticsearch_initialize() {
         ensure_dir_exists "$dir"
         am_i_root && chown "$ELASTICSEARCH_DAEMON_USER:$ELASTICSEARCH_DAEMON_GROUP" "$dir"
     done
+    am_i_root && chown "$ELASTICSEARCH_DAEMON_USER:$ELASTICSEARCH_DAEMON_GROUP" "${ELASTICSEARCH_CONFDIR}/jvm.options"
 
     if [[ -f "$ELASTICSEARCH_CONF_FILE" ]]; then
         info "Custom configuration file detected, using it..."
