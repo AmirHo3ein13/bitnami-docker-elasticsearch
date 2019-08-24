@@ -27,6 +27,7 @@ ENV BITNAMI_APP_NAME="elasticsearch" \
     ELASTICSEARCH_NODE_PORT_NUMBER="9300" \
     ELASTICSEARCH_NODE_TYPE="master" \
     ELASTICSEARCH_PLUGINS="" \
+    ELASTICSEARCH_KEYS="" \
     ELASTICSEARCH_PORT_NUMBER="9200" \
     LD_LIBRARY_PATH="/opt/bitnami/elasticsearch/jdk/lib:/opt/bitnami/elasticsearch/jdk/lib/server:$LD_LIBRARY_PATH" \
     NAMI_PREFIX="/.nami" \

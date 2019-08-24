@@ -429,3 +429,31 @@ elasticsearch_install_plugins() {
         fi
     done
 }
+
+
+
+
+########################
+# Add storage keys
+# Globals:
+#   ELASTICSEARCH_KEYS
+# Arguments:
+#   None
+# Returns:
+#   None
+#########################
+elasticsearch_add_keys() {
+    read -r -a keys_list <<< "$(tr ';' ' ' <<< "$ELASTICSEARCH_KEYS")"
+    debug "Adding keys: ${keys_list[*]}"
+    elasticsearch-keystore create
+    for key in "${keys_list[@]}"; do
+        debug "Add key: $key"
+        read -r -a key_value <<< "$(tr ',' ' ' <<< "$key")"
+        if [[ "${BITNAMI_DEBUG:-false}" = true ]]; then
+            echo ${key_value[1]} | elasticsearch-keystore add --stdin ${key_value[0]}
+        else
+            echo ${key_value[1]} | elasticsearch-keystore add --stdin ${key_value[0]} >/dev/null 2>&1
+        fi
+    done
+    am_i_root && chown "$ELASTICSEARCH_DAEMON_USER:$ELASTICSEARCH_DAEMON_GROUP" "${ELASTICSEARCH_CONFDIR}/elasticsearch.keystore"
+}
